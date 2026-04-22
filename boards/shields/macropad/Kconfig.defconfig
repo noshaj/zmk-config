@@ -1,1 +1,9 @@
+if SHIELD_MACROPAD
 
+config ZMK_KEYBOARD_NAME
+    default "MyMacropad"
+
+config ZMK_KSCAN_MATRIX_POLLING
+    default y
+
+endif
