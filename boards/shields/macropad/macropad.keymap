@@ -9,11 +9,12 @@
         default_layer {
             display-name = "Base";
             bindings = <
-                &kp A  &kp B  &kp C
+                &studio_unlock // Press Key 1 to unlock Studio
+                &kp B          // Key 2
+                &kp C          // Key 3
             >;
         };
 
-        // ZMK Studio needs this extra layer to store your changes
         extra_layer {
             status = "reserved";
         };
