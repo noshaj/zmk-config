@@ -1,17 +1,28 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <dt-bindings/gpio/gpio.h>
 
+// 1. Fix the Right Control conflict
+#undef RC
+#define RC(row, col) (((row) << 8) | (col))
+
 / { 
     chosen { 
         zmk,kscan = &kscan0;
         zmk,physical-layout = &physical_layout0; 
     }; 
 
+    // 2. This section is MANDATORY for ZMK Studio
     physical_layout0: physical_layout_0 { 
         compatible = "zmk,physical-layout"; 
         display-name = "Default Layout"; 
         transform = <&default_transform>; 
         kscan = <&kscan0>; 
+        
+        // ZMK Studio needs these coordinates to draw the keys
+        keys 
+            = <RC(0,0) 0 0>   // Key 1 at X=0, Y=0
+            , <RC(0,1) 100 0> // Key 2 at X=100, Y=0
+            , <RC(0,2) 200 0>;// Key 3 at X=200, Y=0
     }; 
 
     default_transform: matrix_transform { 
@@ -19,7 +30,7 @@
         rows = <1>; 
         columns = <3>; 
         map = < 
-            0 1 2 
+            RC(0,0) RC(0,1) RC(0,2) 
         >; 
     }; 
 
