@@ -11,18 +11,24 @@
         zmk,physical-layout = &physical_layout0; 
     }; 
 
-    // 2. This section is MANDATORY for ZMK Studio
+    // 2. Define the key_physical label so the compiler recognizes it
+    key_physical: key_physical {
+        compatible = "zmk,physical-layout-key";
+        #address-cells = <1>;
+        #key-cells = <2>;
+    };
+
     physical_layout0: physical_layout_0 { 
         compatible = "zmk,physical-layout"; 
         display-name = "Default Layout"; 
         transform = <&default_transform>; 
         kscan = <&kscan0>; 
         
-        // ZMK Studio needs these coordinates to draw the keys
+        // Format: &label index x_coord y_coord
         keys 
-            = <RC(0,0) 0 0>   // Key 1 at X=0, Y=0
-            , <RC(0,1) 100 0> // Key 2 at X=100, Y=0
-            , <RC(0,2) 200 0>;// Key 3 at X=200, Y=0
+            = <&key_physical 0 0 0>   
+            , <&key_physical 1 100 0> 
+            , <&key_physical 2 200 0>;
     }; 
 
     default_transform: matrix_transform { 
