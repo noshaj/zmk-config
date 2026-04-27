@@ -1,7 +1,6 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <dt-bindings/gpio/gpio.h>
 
-// This solves the conflict where RC is confused with "Right Control"
 #undef RC
 #define RC(row, col) (((row) << 8) | (col))
 
@@ -16,10 +15,12 @@
         display-name = "Default Layout"; 
         transform = <&default_transform>; 
         kscan = <&kscan0>; 
+        
+        // We removed &key_physical and used the raw coordinate mapping
         keys 
-            = <&key_physical 0 0> 
-            , <&key_physical 100 0> 
-            , <&key_physical 200 0>; 
+            = <RC(0,0) 0 0 100 100>  // Key 1: Index 0, X=0, Y=0, Width=100, Height=100
+            , <RC(0,1) 100 0 100 100> // Key 2: Index 1, X=100, Y=0...
+            , <RC(0,2) 200 0 100 100>; // Key 3: Index 2, X=200, Y=0...
     }; 
 
     default_transform: matrix_transform { 
