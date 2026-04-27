@@ -1,9 +1,6 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <dt-bindings/gpio/gpio.h>
 
-#undef RC
-#define RC(row, col) (((row) << 8) | (col))
-
 / { 
     chosen { 
         zmk,kscan = &kscan0;
@@ -15,12 +12,6 @@
         display-name = "Default Layout"; 
         transform = <&default_transform>; 
         kscan = <&kscan0>; 
-        
-        // We removed &key_physical and used the raw coordinate mapping
-        keys 
-            = <RC(0,0) 0 0 100 100>  // Key 1: Index 0, X=0, Y=0, Width=100, Height=100
-            , <RC(0,1) 100 0 100 100> // Key 2: Index 1, X=100, Y=0...
-            , <RC(0,2) 200 0 100 100>; // Key 3: Index 2, X=200, Y=0...
     }; 
 
     default_transform: matrix_transform { 
@@ -28,7 +19,7 @@
         rows = <1>; 
         columns = <3>; 
         map = < 
-            RC(0,0) RC(0,1) RC(0,2) 
+            0 1 2 
         >; 
     }; 
 
