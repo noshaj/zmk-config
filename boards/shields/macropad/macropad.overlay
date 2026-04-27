@@ -1,44 +1,46 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <dt-bindings/gpio/gpio.h>
+#include <physical_layouts.dtsi>
 
-/ { 
-    chosen { 
+/* Fix Right Control conflict */
+#undef RC
+#define RC(row, col) (((row) << 8) | (col))
+
+/ {
+    chosen {
         zmk,kscan = &kscan0;
-        zmk,physical-layout = &physical_layout0; 
-    }; 
+        zmk,physical-layout = &macropad_physical_layout;
+    };
 
-    /* 1. We define the matrix transform using raw index numbers */
-    default_transform: matrix_transform { 
-        compatible = "zmk,matrix-transform"; 
-        rows = <1>; 
-        columns = <3>; 
-        map = < 
-            0 1 2 
-        >; 
-    }; 
+    default_transform: matrix_transform {
+        compatible = "zmk,matrix-transform";
+        rows = <1>;
+        columns = <3>;
+        map = <
+            RC(0,0) RC(0,1) RC(0,2)
+        >;
+    };
 
-    /* 2. We define the physical layout using raw integers for ZMK Studio */
-    /* Format per key: <index x_coord y_coord width height> */
-    physical_layout0: physical_layout_0 { 
-        compatible = "zmk,physical-layout"; 
-        display-name = "Default Layout"; 
-        transform = <&default_transform>; 
-        kscan = <&kscan0>; 
-        keys 
-            = <0 0 0 100 100>   
-            , <1 100 0 100 100> 
-            , <2 200 0 100 100>;
-    }; 
+    macropad_physical_layout: macropad_physical_layout {
+        compatible = "zmk,physical-layout";
+        display-name = "Macro Pad";
+        transform = <&default_transform>;
+        kscan = <&kscan0>;
+        keys
+            // Format: width height x y rotation rx ry
+            = <&key_physical_attrs 100 100 0 0 0 0 0>   // Key 1 (Left)
+            , <&key_physical_attrs 100 100 100 0 0 0 0> // Key 2 (Middle)
+            , <&key_physical_attrs 100 100 200 0 0 0 0>;// Key 3 (Right)
+    };
 
-    /* 3. Your physical hardware pins */
-    kscan0: kscan { 
-        compatible = "zmk,kscan-gpio-matrix"; 
-        label = "KSCAN"; 
-        diode-direction = "col2row"; 
-        row-gpios = <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>; 
-        col-gpios 
-            = <&xiao_d 0 GPIO_ACTIVE_HIGH> 
-            , <&xiao_d 1 GPIO_ACTIVE_HIGH> 
-            , <&xiao_d 2 GPIO_ACTIVE_HIGH>; 
-    }; 
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-matrix";
+        label = "KSCAN";
+        diode-direction = "col2row";
+        row-gpios = <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+        col-gpios
+            = <&xiao_d 0 GPIO_ACTIVE_HIGH>
+            , <&xiao_d 1 GPIO_ACTIVE_HIGH>
+            , <&xiao_d 2 GPIO_ACTIVE_HIGH>;
+    };
 };
