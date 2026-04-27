@@ -1,14 +1,14 @@
-#include <behaviors.dtsi>
-#include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/bt.h>
-
 / {
     keymap {
         compatible = "zmk,keymap";
+        
         default_layer {
-            bindings = <
-                &kp A &kp B &kp C
-            >;
+            bindings = <&kp A &kp B &kp C>;
+        };
+
+        // This layer is required for Studio to store new mappings
+        extra_layer {
+            status = "reserved";
         };
     };
 };
