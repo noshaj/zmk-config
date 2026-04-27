@@ -1,21 +1,23 @@
 / {
     chosen {
-        zmk,kscan = &kscan0;
+        zmk,physical-layout = &physical_layout0;
     };
 
-    kscan0: kscan {
-        compatible = "zmk,kscan-gpio-matrix";
-        label = "KSCAN";
-        
-        // "col2row" means cathodes (black lines) are connected to the rows
-        diode-direction = "col2row"; 
+    physical_layout0: physical_layout_0 {
+        compatible = "zmk,physical-layout";
+        display-name = "Default Layout";
+        transform = <&default_transform>;
+        kscan = <&kscan0>;
+        keys  // Define key positions: x y (width height)
+            = <&key_physical 0 0>
+            , <&key_physical 100 0>
+            , <&key_physical 200 0>;
+    };
 
-        row-gpios
-            = <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
-
-        col-gpios
-            = <&xiao_d 0 GPIO_ACTIVE_HIGH>
-            , <&xiao_d 1 GPIO_ACTIVE_HIGH>
-            , <&xiao_d 2 GPIO_ACTIVE_HIGH>;
+    default_transform: matrix_transform {
+        compatible = "zmk,matrix-transform";
+        rows = <1>;
+        columns = <3>;
+        map = <RC(0,0) RC(0,1) RC(0,2)>;
     };
 };
