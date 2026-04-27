@@ -1,7 +1,7 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <dt-bindings/gpio/gpio.h>
 
-// 1. Fix the Right Control conflict
+/* Fix Right Control conflict */
 #undef RC
 #define RC(row, col) (((row) << 8) | (col))
 
@@ -11,26 +11,6 @@
         zmk,physical-layout = &physical_layout0; 
     }; 
 
-    // 2. Define the key_physical label so the compiler recognizes it
-    key_physical: key_physical {
-        compatible = "zmk,physical-layout-key";
-        #address-cells = <1>;
-        #key-cells = <2>;
-    };
-
-    physical_layout0: physical_layout_0 { 
-        compatible = "zmk,physical-layout"; 
-        display-name = "Default Layout"; 
-        transform = <&default_transform>; 
-        kscan = <&kscan0>; 
-        
-        // Format: &label index x_coord y_coord
-        keys 
-            = <&key_physical 0 0 0>   
-            , <&key_physical 1 100 0> 
-            , <&key_physical 2 200 0>;
-    }; 
-
     default_transform: matrix_transform { 
         compatible = "zmk,matrix-transform"; 
         rows = <1>; 
@@ -38,6 +18,22 @@
         map = < 
             RC(0,0) RC(0,1) RC(0,2) 
         >; 
+    }; 
+
+    physical_layout0: physical_layout_0 { 
+        compatible = "zmk,physical-layout"; 
+        display-name = "Default Layout"; 
+        transform = <&default_transform>; 
+        kscan = <&kscan0>; 
+        
+        /* 
+           Using raw numbers here in a single flat list. 
+           ZMK Studio will parse these as (index, x, y, width, height) 
+        */
+        keys 
+            = <RC(0,0) 0 0 100 100>   
+            , <RC(0,1) 100 0 100 100> 
+            , <RC(0,2) 200 0 100 100>;
     }; 
 
     kscan0: kscan { 
