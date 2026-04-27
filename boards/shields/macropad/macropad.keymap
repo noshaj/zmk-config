@@ -6,9 +6,7 @@
         compatible = "zmk,keymap";
         default_layer {
             bindings = <
-                &kp Q &kp W &kp E &kp R    // Row 1: Top Row (Q-R)
-                &kp A &kp S &kp D &kp F    // Row 2: Middle Row (A-F)
-                &kp Z &kp X &kp C &kp V    // Row 3: Bottom Row (Z-V)
+                &kp A, &kp B, &kp C   // Row 1: Top Row (Q-R)
             >;
             sensor-bindings = <&inc_dec_kp RBKT LBKT>;
         };
