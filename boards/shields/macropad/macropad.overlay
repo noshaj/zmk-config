@@ -1,41 +1,41 @@
-/ {
-    chosen {
-        zmk,physical-layout = &physical_layout0;
-    };
+#include <dt-bindings/zmk/matrix_transform.h>
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/keys.h>
 
-    // This section is for ZMK Studio's visual interface
-    physical_layout0: physical_layout_0 {
-        compatible = "zmk,physical-layout";
-        display-name = "Default Layout";
-        transform = <&default_transform>;
-        kscan = <&kscan0>;
-        keys
-            = <&key_physical 0 0>
-            , <&key_physical 100 0>
-            , <&key_physical 200 0>;
-    };
+/ { 
+    chosen { 
+        zmk,kscan = &kscan0; // Added this back in to be safe
+        zmk,physical-layout = &physical_layout0; 
+    }; 
 
-    default_transform: matrix_transform {
-        compatible = "zmk,matrix-transform";
-        rows = <1>;
-        columns = <3>;
-        // RC(row, column) - Ensure there is NO space inside the parentheses
-        map = <
-            RC(0,0) RC(0,1) RC(0,2)
-        >;
-    };
+    physical_layout0: physical_layout_0 { 
+        compatible = "zmk,physical-layout"; 
+        display-name = "Default Layout"; 
+        transform = <&default_transform>; 
+        kscan = <&kscan0>; 
+        keys 
+            = <&key_physical 0 0> 
+            , <&key_physical 100 0> 
+            , <&key_physical 200 0>; 
+    }; 
 
-    kscan0: kscan {
-        compatible = "zmk,kscan-gpio-matrix";
-        label = "KSCAN";
+    default_transform: matrix_transform { 
+        compatible = "zmk,matrix-transform"; 
+        rows = <1>; 
+        columns = <3>; 
+        map = < 
+            RC(0,0) RC(0,1) RC(0,2) 
+        >; 
+    }; 
+
+    kscan0: kscan { 
+        compatible = "zmk,kscan-gpio-matrix"; 
+        label = "KSCAN"; 
         diode-direction = "col2row"; 
-
-        row-gpios
-            = <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
-
-        col-gpios
-            = <&xiao_d 0 GPIO_ACTIVE_HIGH>
-            , <&xiao_d 1 GPIO_ACTIVE_HIGH>
-            , <&xiao_d 2 GPIO_ACTIVE_HIGH>;
-    };
+        row-gpios = <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>; 
+        col-gpios 
+            = <&xiao_d 0 GPIO_ACTIVE_HIGH> 
+            , <&xiao_d 1 GPIO_ACTIVE_HIGH> 
+            , <&xiao_d 2 GPIO_ACTIVE_HIGH>; 
+    }; 
 };
