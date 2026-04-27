@@ -1,10 +1,5 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <dt-bindings/gpio/gpio.h>
-#include <dt-bindings/zmk/physical_layouts.h>
-
-/* Fix Right Control conflict */
-#undef RC
-#define RC(row, col) (((row) << 8) | (col))
 
 / { 
     chosen { 
@@ -12,31 +7,30 @@
         zmk,physical-layout = &physical_layout0; 
     }; 
 
+    /* 1. We define the matrix transform using raw index numbers */
     default_transform: matrix_transform { 
         compatible = "zmk,matrix-transform"; 
         rows = <1>; 
         columns = <3>; 
         map = < 
-            RC(0,0) RC(0,1) RC(0,2) 
+            0 1 2 
         >; 
     }; 
 
+    /* 2. We define the physical layout using raw integers for ZMK Studio */
+    /* Format per key: <index x_coord y_coord width height> */
     physical_layout0: physical_layout_0 { 
         compatible = "zmk,physical-layout"; 
         display-name = "Default Layout"; 
         transform = <&default_transform>; 
         kscan = <&kscan0>; 
-        
-        /* 
-           This uses the MK_KEY macro from physical_layouts.h 
-           Format: MK_KEY(row, col, x_pos, y_pos) 
-        */
         keys 
-            = <MK_KEY(0, 0, 0, 0)>
-            , <MK_KEY(0, 1, 100, 0)>
-            , <MK_KEY(0, 2, 200, 0)>;
+            = <0 0 0 100 100>   
+            , <1 100 0 100 100> 
+            , <2 200 0 100 100>;
     }; 
 
+    /* 3. Your physical hardware pins */
     kscan0: kscan { 
         compatible = "zmk,kscan-gpio-matrix"; 
         label = "KSCAN"; 
