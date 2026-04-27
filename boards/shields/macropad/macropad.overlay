@@ -3,12 +3,13 @@
         zmk,physical-layout = &physical_layout0;
     };
 
+    // This section is for ZMK Studio's visual interface
     physical_layout0: physical_layout_0 {
         compatible = "zmk,physical-layout";
         display-name = "Default Layout";
         transform = <&default_transform>;
         kscan = <&kscan0>;
-        keys  // Define key positions: x y (width height)
+        keys
             = <&key_physical 0 0>
             , <&key_physical 100 0>
             , <&key_physical 200 0>;
@@ -18,6 +19,23 @@
         compatible = "zmk,matrix-transform";
         rows = <1>;
         columns = <3>;
-        map = <RC(0,0) RC(0,1) RC(0,2)>;
+        // RC(row, column) - Ensure there is NO space inside the parentheses
+        map = <
+            RC(0,0) RC(0,1) RC(0,2)
+        >;
+    };
+
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-matrix";
+        label = "KSCAN";
+        diode-direction = "col2row"; 
+
+        row-gpios
+            = <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+
+        col-gpios
+            = <&xiao_d 0 GPIO_ACTIVE_HIGH>
+            , <&xiao_d 1 GPIO_ACTIVE_HIGH>
+            , <&xiao_d 2 GPIO_ACTIVE_HIGH>;
     };
 };
