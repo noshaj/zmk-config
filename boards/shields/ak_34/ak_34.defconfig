@@ -1,4 +1,4 @@
-if SHIELD_MACROPAD
+if SHIELD_AK_34
 
 config ZMK_KEYBOARD_NAME
     default "ak_34"
