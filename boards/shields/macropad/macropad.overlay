@@ -2,6 +2,7 @@
 #include <dt-bindings/gpio/gpio.h>
 #include <physical_layouts.dtsi>
 
+/* Fix Right Control conflict */
 #undef RC
 #define RC(row, col) (((row) << 8) | (col))
 
@@ -35,15 +36,17 @@
 
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
-        diode-direction = "col2row";
+        diode-direction = "row2col"; 
+
         row-gpios
-            = <&xiao_d 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&xiao_d 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
-            , <&xiao_d 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+            = <&xiao_d 7 GPIO_ACTIVE_HIGH>
+            , <&xiao_d 8 GPIO_ACTIVE_HIGH>
+            , <&xiao_d 9 GPIO_ACTIVE_HIGH>;
+
         col-gpios
-            = <&xiao_d 6 GPIO_ACTIVE_HIGH>
-            , <&xiao_d 5 GPIO_ACTIVE_HIGH>
-            , <&xiao_d 4 GPIO_ACTIVE_HIGH>
-            , <&xiao_d 3 GPIO_ACTIVE_HIGH>; // Assumed D3 for Col 4
+            = <&xiao_d 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&xiao_d 5 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&xiao_d 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
     };
 };
