@@ -1,9 +1,6 @@
 if SHIELD_AK_34
 
 config ZMK_KEYBOARD_NAME
-    default "ak_34"
-
-config ZMK_KSCAN_MATRIX_POLLING
-    default y
+    default "AK-34"
 
 endif
