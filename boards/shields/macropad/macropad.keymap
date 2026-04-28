@@ -11,11 +11,11 @@
                 &kp C &kp N5 &kp N9 &kp N4
                 &kp D &kp N6 &kp N0 &kp N8
                 &kp G &kp N7 &kp MINUS &kp EQUAL
-                /* These are the B and D boxes you see in ZMK Studio */
+                /* These are positions 12 and 13 (The 'B' and 'D' boxes) */
                 &kp LBKT &kp RBKT 
             >;
             
-            /* Turning knob now physically 'presses' the buttons assigned to the B and D boxes */
+            /* THIS IS THE FIX: Link physical rotation to the buttons at the bottom */
             sensor-bindings = <&inc_dec_kp LBKT RBKT>;
         };
 
