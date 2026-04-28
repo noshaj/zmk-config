@@ -1,1 +1,1 @@
-source "config/boards/shields/ak_34/Kconfig"
+source "config/boards/shields/ak_34/ak_34.shield"
