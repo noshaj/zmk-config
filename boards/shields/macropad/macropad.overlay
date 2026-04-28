@@ -7,21 +7,8 @@
 
 / {
     chosen {
-        zmk,kscan = &kscan_composite; // Switch to the composite scanner
+        zmk,kscan = &kscan0;
         zmk,physical-layout = &macropad_physical_layout;
-    };
-
-    // This block tricks ZMK into seeing the encoder as buttons
-    kscan_composite: kscan_composite {
-        compatible = "zmk,kscan-composite";
-        rows = <5>;
-        columns = <3>;
-
-        matrix {
-            kscan = <&kscan0>;
-        };
-
-        /* We leave Row 4 empty for the virtual encoder presses */
     };
 
     default_transform: matrix_transform {
@@ -32,7 +19,7 @@
             RC(0,0) RC(1,0) RC(2,0) RC(3,0)
             RC(0,1) RC(1,1) RC(2,1) RC(3,1)
             RC(0,2) RC(1,2) RC(2,2) RC(3,2)
-            /* Virtual addresses for the B and D boxes */
+            /* Virtual addresses for B and D boxes */
             RC(4,0) RC(4,1)
         >;
     };
@@ -41,16 +28,16 @@
         compatible = "zmk,physical-layout";
         display-name = "AK-34";
         transform = <&default_transform>;
-        kscan = <&kscan_composite>;
+        kscan = <&kscan0>;
         keys
             = <&key_physical_attrs 100 100 0 0 0 0 0>   , <&key_physical_attrs 100 100 100 0 0 0 0>   , <&key_physical_attrs 100 100 200 0 0 0 0>   , <&key_physical_attrs 100 100 300 0 0 0 0>
             , <&key_physical_attrs 100 100 0 100 0 0 0> , <&key_physical_attrs 100 100 100 100 0 0 0> , <&key_physical_attrs 100 100 200 100 0 0 0> , <&key_physical_attrs 100 100 300 100 0 0 0>
             , <&key_physical_attrs 100 100 0 200 0 0 0> , <&key_physical_attrs 100 100 100 200 0 0 0> , <&key_physical_attrs 100 100 200 200 0 0 0> , <&key_physical_attrs 100 100 300 200 0 0 0>
-            /* Visual boxes B and D */
+            /* Bottom Row B and D */
             , <&key_physical_attrs 100 100 50 350 0 0 0> , <&key_physical_attrs 100 100 150 350 0 0 0>;
     };
 
-    kscan0: kscan0 {
+    kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row"; 
         row-gpios
