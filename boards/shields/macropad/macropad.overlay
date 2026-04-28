@@ -2,7 +2,6 @@
 #include <dt-bindings/gpio/gpio.h>
 #include <physical_layouts.dtsi>
 
-/* Fix Right Control conflict */
 #undef RC
 #define RC(row, col) (((row) << 8) | (col))
 
@@ -16,7 +15,6 @@
         compatible = "zmk,matrix-transform";
         rows = <4>;
         columns = <3>;
-        /* Map connects your 4x3 wiring to the 3x4 Studio grid */
         map = <
             RC(0,0) RC(1,0) RC(2,0) RC(3,0)
             RC(0,1) RC(1,1) RC(2,1) RC(3,1)
@@ -51,11 +49,10 @@
             , <&xiao_d 4 GPIO_ACTIVE_HIGH>;
     };
 
-    /* Rotary Encoder Definition */
     main_encoder: encoder_main {
         compatible = "alps,ec11";
-        a-gpios = <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; // Yellow wire
-        b-gpios = <&xiao_d 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; // Blue wire
+        a-gpios = <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; 
+        b-gpios = <&xiao_d 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>; 
         steps = <80>;
         status = "okay";
     };
