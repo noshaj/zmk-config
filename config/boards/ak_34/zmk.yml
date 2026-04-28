@@ -1,6 +1,5 @@
 file_format: "1"
 id: ak_34
 name: AK-34
-type: shield
-url: https://zmk.dev
+type: board
 board: ["seeeduino_xiao_ble"]
