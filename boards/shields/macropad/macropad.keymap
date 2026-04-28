@@ -10,11 +10,11 @@
                 &kp C &kp N5 &kp N9 &kp N4
                 &kp D &kp N6 &kp N0 &kp N8
                 &kp G &kp N7 &kp MINUS &kp EQUAL
-                /* These represent the B and E boxes in Studio */
+                /* These are the virtual buttons for the encoder rotation */
                 &kp LBKT &kp RBKT 
             >;
             
-            /* Turning knob now physically 'presses' the buttons above */
+            /* High-sensitivity rotation mapping */
             sensor-bindings = <&inc_dec_kp LBKT RBKT>;
         };
         extra_layer { status = "reserved"; };
