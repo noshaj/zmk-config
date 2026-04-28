@@ -1,5 +1,5 @@
 file_format: "1"
 id: ak_34
 name: AK-34
-type: board
+type: shield
 board: ["seeeduino_xiao_ble"]
