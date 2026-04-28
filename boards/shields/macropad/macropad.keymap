@@ -1,5 +1,6 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
 
 / {
     keymap {
@@ -9,10 +10,11 @@
             bindings = <
                 &kp C &kp N5 &kp N9 &kp N4
                 &kp D &kp N6 &kp N0 &kp N8
-                &kp G &kp N7 &kp MINUS &kp EQUAL
+                &mo 1 &kp N7 &kp MINUS &kp EQUAL
             >;
             sensor-bindings = <&inc_dec_kp LBKT RBKT>;
         };
-        extra_layer { status = "reserved"; };
+        
+        // ... [keep other layers here] ...
     };
 };
