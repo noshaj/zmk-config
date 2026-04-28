@@ -1,7 +1,7 @@
 if SHIELD_MACROPAD
 
 config ZMK_KEYBOARD_NAME
-    default "ak_-4"
+    default "ak_34"
 
 config ZMK_KSCAN_MATRIX_POLLING
     default y
