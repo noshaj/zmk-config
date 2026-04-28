@@ -11,12 +11,16 @@
                 &kp C &kp N5 &kp N9 &kp N4
                 &kp D &kp N6 &kp N0 &kp N8
                 &kp G &kp N7 &kp MINUS &kp EQUAL
-                /* These are positions 12 and 13 (The 'B' and 'D' boxes) */
-                &kp LBKT &kp RBKT 
+                /* These are the B and D boxes (Positions 12 and 13) */
+                &kp F23 &kp F24 
             >;
             
-            /* THIS IS THE FIX: Link physical rotation to the buttons at the bottom */
-            sensor-bindings = <&inc_dec_kp LBKT RBKT>;
+            /* 
+               We use F23 and F24 as "ghost" keys. 
+               When you change the B and D boxes in Studio, 
+               this sensor-binding will follow whatever you pick!
+            */
+            sensor-bindings = <&inc_dec_kp F24 F23>;
         };
 
         extra_layer {
