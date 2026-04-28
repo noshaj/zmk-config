@@ -7,9 +7,10 @@
         default_layer {
             display-name = "Base";
             bindings = <
-                &kp C &kp N5 &kp N9 &kp X
-                &kp D &kp N6 &kp N0 &kp X
-                &kp G &kp N7 &kp MINUS &kp X
+                &kp C &kp N5 &kp N9
+                &kp D &kp N6 &kp N0
+                &kp G &kp N7 &kp MINUS
+                &kp N4 &kp N8 &kp EQUAL
             >;
         };
         extra_layer { status = "reserved"; };
