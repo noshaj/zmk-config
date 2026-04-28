@@ -4,19 +4,23 @@
 / {
     keymap {
         compatible = "zmk,keymap";
+
         default_layer {
             display-name = "Base";
             bindings = <
-                &kp C &kp D &kp G &kp N4
-                &kp N5 &kp N6 &kp N7 &kp N8
-                &kp N9 &kp N0 &kp MINUS &kp EQUAL
-                /* These are the 'buttons' Studio will see */
-                &kp C_VOL_UP &kp C_VOL_DN 
+                &kp C &kp N5 &kp N9 &kp N4
+                &kp D &kp N6 &kp N0 &kp N8
+                &kp G &kp N7 &kp MINUS &kp EQUAL
+                /* These remain as buttons for Studio visibility */
+                &kp LBKT &kp RBKT 
             >;
             
-            /* This links the physical turn to those two buttons */
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            /* Turning Right = ] (RBKT), Turning Left = [ (LBKT) */
+            sensor-bindings = <&inc_dec_kp RBKT LBKT>;
         };
-        extra_layer { status = "reserved"; };
+
+        extra_layer {
+            status = "reserved";
+        };
     };
 };
