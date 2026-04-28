@@ -10,11 +10,9 @@
                 &kp C &kp N5 &kp N9 &kp N4
                 &kp D &kp N6 &kp N0 &kp N8
                 &kp G &kp N7 &kp MINUS &kp EQUAL
-                /* These are the virtual buttons for the encoder rotation */
+                /* These are Row 4, which B and D use */
                 &kp LBKT &kp RBKT 
             >;
-            
-            /* High-sensitivity rotation mapping */
             sensor-bindings = <&inc_dec_kp LBKT RBKT>;
         };
         extra_layer { status = "reserved"; };
