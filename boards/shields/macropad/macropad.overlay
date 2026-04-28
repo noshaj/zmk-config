@@ -13,12 +13,14 @@
 
     default_transform: matrix_transform {
         compatible = "zmk,matrix-transform";
-        rows = <4>;
+        rows = <5>; // 4 physical rows + 1 virtual row for encoder boxes
         columns = <3>;
         map = <
             RC(0,0) RC(1,0) RC(2,0) RC(3,0)
             RC(0,1) RC(1,1) RC(2,1) RC(3,1)
             RC(0,2) RC(1,2) RC(2,2) RC(3,2)
+            /* Virtual addresses for the encoder boxes */
+            RC(4,0) RC(4,1)
         >;
     };
 
@@ -27,10 +29,12 @@
         display-name = "AK-34";
         transform = <&default_transform>;
         kscan = <&kscan0>;
-        keys // This "draws" your 4x3 physical rows into a 3x4 visual grid for Studio
+        keys
             = <&key_physical_attrs 100 100 0 0 0 0 0>   , <&key_physical_attrs 100 100 100 0 0 0 0>   , <&key_physical_attrs 100 100 200 0 0 0 0>   , <&key_physical_attrs 100 100 300 0 0 0 0>
             , <&key_physical_attrs 100 100 0 100 0 0 0> , <&key_physical_attrs 100 100 100 100 0 0 0> , <&key_physical_attrs 100 100 200 100 0 0 0> , <&key_physical_attrs 100 100 300 100 0 0 0>
-            , <&key_physical_attrs 100 100 0 200 0 0 0> , <&key_physical_attrs 100 100 100 200 0 0 0> , <&key_physical_attrs 100 100 200 200 0 0 0> , <&key_physical_attrs 100 100 300 200 0 0 0>;
+            , <&key_physical_attrs 100 100 0 200 0 0 0> , <&key_physical_attrs 100 100 100 200 0 0 0> , <&key_physical_attrs 100 100 200 200 0 0 0> , <&key_physical_attrs 100 100 300 200 0 0 0>
+            /* THESE ARE YOUR ENCODER BOXES - Visually placed at the bottom */
+            , <&key_physical_attrs 100 100 50 350 0 0 0> , <&key_physical_attrs 100 100 150 350 0 0 0>;
     };
 
     kscan0: kscan {
