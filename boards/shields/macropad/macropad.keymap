@@ -5,16 +5,54 @@
 / {
     keymap {
         compatible = "zmk,keymap";
+
+        // Layer 0
         default_layer {
             display-name = "Base";
             bindings = <
                 &kp C &kp N5 &kp N9 &kp N4
                 &kp D &kp N6 &kp N0 &kp N8
-                &mo 1 &kp N7 &kp MINUS &kp EQUAL
+                &mo 1 &kp N7 &kp MINUS &kp EQUAL 
             >;
             sensor-bindings = <&inc_dec_kp LBKT RBKT>;
         };
-        
-        // ... [keep other layers here] ...
+
+        // Layer 1 (Bluetooth & System)
+        layer_1 {
+            display-name = "BT";
+            bindings = <
+                &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_CLR
+                &mo 2        &trans       &trans       &trans
+                &trans       &trans       &trans       &trans
+            >;
+            sensor-bindings = <&inc_dec_kp LBKT RBKT>;
+        };
+
+        // Layer 2 (System/Sleep)
+        layer_2 {
+            display-name = "Sleep";
+            bindings = <
+                &soft_off &trans &trans &trans
+                &trans    &trans &trans &trans
+                &mo 3     &trans &trans &trans
+            >;
+            sensor-bindings = <&inc_dec_kp LBKT RBKT>;
+        };
+
+        // Layer 3 (Empty/Custom)
+        layer_3 {
+            display-name = "Media";
+            bindings = <
+                &trans &trans &trans &trans
+                &trans &trans &trans &trans
+                &trans &trans &trans &trans
+            >;
+            sensor-bindings = <&inc_dec_kp LBKT RBKT>;
+        };
+
+        // ZMK Studio requirement for saving live changes
+        extra_layer {
+            status = "reserved";
+        };
     };
 };
