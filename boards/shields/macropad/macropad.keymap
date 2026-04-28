@@ -11,12 +11,11 @@
                 &kp C &kp N5 &kp N9 &kp N4
                 &kp D &kp N6 &kp N0 &kp N8
                 &kp G &kp N7 &kp MINUS &kp EQUAL
-                /* These are your 'B' and 'D' boxes in Studio */
+                /* These are the B and D boxes you see in ZMK Studio */
                 &kp LBKT &kp RBKT 
             >;
             
-            /* This is the magic link: it tells the encoder to 
-               trigger the keys assigned to positions 12 and 13 */
+            /* Turning knob now physically 'presses' the buttons assigned to the B and D boxes */
             sensor-bindings = <&inc_dec_kp LBKT RBKT>;
         };
 
