@@ -10,18 +10,13 @@
                 &kp C &kp N5 &kp N9 &kp N4
                 &kp D &kp N6 &kp N0 &kp N8
                 &kp G &kp N7 &kp MINUS &kp EQUAL
+                /* These correspond to the new boxes in Studio */
+                &kp F23 &kp F24 
             >;
-            // Maps rotation to the behaviors of the 4th row keys
-            sensor-bindings = <&inc_dec_kp F24 F23>; 
+            
+            /* Turning knob triggers whatever is mapped to the F23/F24 boxes */
+            sensor-bindings = <&inc_dec_kp F23 F24>;
         };
-        extra_layer { 
-            status = "reserved"; 
-            bindings = <
-                &trans &trans &trans &trans
-                &trans &trans &trans &trans
-                &trans &trans &trans &trans
-                &kp F23 &kp F24 &trans // Reserved slots for Studio remapping
-            >;
-        };
+        extra_layer { status = "reserved"; };
     };
 };
