@@ -8,8 +8,8 @@
             display-name = "Base";
             bindings = <
                 &kp C &kp D &kp G &kp N4
-                &kp D &kp N6 &kp N0 &kp N8
-                &kp G &kp N7 &kp MINUS &kp EQUAL
+                &kp N5 &kp N6 &kp N7 &kp N8
+                &kp N9 &kp N0 &kp MINUS &kp EQUAL
             >;
         };
         extra_layer { status = "reserved"; };
