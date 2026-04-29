@@ -11,19 +11,14 @@
         zmk,physical-layout = &macropad_physical_layout;
     };
 
-    /* --- BLUE LED STATUS (OLD SYNTAX) --- */
+    /* --- BLUE LED DEFINITION --- */
     leds {
         compatible = "gpio-leds";
         blue_led: led_0 {
+            /* XIAO Blue LED is on P0.06 */
             gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
+            label = "Blue LED";
         };
-    };
-
-    /* This node is compatible with your current ZMK version */
-    led_status {
-        compatible = "zmk,led-indicator-status";
-        led = <&blue_led>;
-        indicator = "connected"; 
     };
 
     /* --- MATRIX & LAYOUT --- */
