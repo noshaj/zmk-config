@@ -4,15 +4,6 @@
 #include <dt-bindings/zmk/outputs.h>
 
 / {
-    /* Define a NOOP behavior for the encoder placeholders */
-    behaviors {
-        sensor_noop: sensor_noop {
-            compatible = "zmk,behavior-sensor-rotate";
-            #sensor-binding-cells = <0>;
-            bindings = <&none>, <&none>;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
@@ -35,29 +26,29 @@
                 &kp F4         &kp F5        &kp F6
                 &studio_unlock &trans        &trans
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&inc_dec_kp RBKT LBKT>;
         };
 
         extra_layer_1 {
-            display-name = "Studio 1";
+            display-name = "S1";
             bindings = <
                 &trans &trans &trans
                 &trans &trans &trans
                 &trans &trans &trans
                 &trans &trans &trans
             >;
-            sensor-bindings = <&sensor_noop>;
+            sensor-bindings = <&inc_dec_kp RBKT LBKT>;
         };
 
         extra_layer_2 {
-            display-name = "Studio 2";
+            display-name = "S2";
             bindings = <
                 &trans &trans &trans
                 &trans &trans &trans
                 &trans &trans &trans
                 &trans &trans &trans
             >;
-            sensor-bindings = <&sensor_noop>;
+            sensor-bindings = <&inc_dec_kp RBKT LBKT>;
         };
     };
 };
