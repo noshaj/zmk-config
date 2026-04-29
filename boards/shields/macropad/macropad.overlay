@@ -11,33 +11,46 @@
         zmk,physical-layout = &macropad_physical_layout;
     };
 
-    /* --- FIXED SOFT OFF WAKEUP CONFIGURATION --- */
-    
+    /* --- STEP 1: Define physical keys for the wakeup system --- */
+    wakeup_keys {
+        compatible = "gpio-keys";
+        wakeup_key0: wakeup_key0 {
+            gpios = <&xiao_d 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+        };
+        wakeup_key1: wakeup_key1 {
+            gpios = <&xiao_d 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+        };
+        wakeup_key2: wakeup_key2 {
+            gpios = <&xiao_d 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+        };
+        wakeup_key3: wakeup_key3 {
+            gpios = <&xiao_d 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+        };
+    };
+
+    /* --- STEP 2: Map those physical keys to ZMK Wakeup Triggers --- */
     row0_wake: row0_wake {
         compatible = "zmk,gpio-key-wakeup-trigger";
-        trigger = <&xiao_d 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+        trigger = <&wakeup_key0>;
     };
-
     row1_wake: row1_wake {
         compatible = "zmk,gpio-key-wakeup-trigger";
-        trigger = <&xiao_d 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+        trigger = <&wakeup_key1>;
     };
-
     row2_wake: row2_wake {
         compatible = "zmk,gpio-key-wakeup-trigger";
-        trigger = <&xiao_d 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+        trigger = <&wakeup_key2>;
     };
-
     row3_wake: row3_wake {
         compatible = "zmk,gpio-key-wakeup-trigger";
-        trigger = <&xiao_d 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+        trigger = <&wakeup_key3>;
     };
 
+    /* --- STEP 3: Link them to the Soft Off system --- */
     soft_off_waker: soft_off_waker {
         compatible = "zmk,soft-off-wakeup-sources";
         wakeup-sources = <&row0_wake &row1_wake &row2_wake &row3_wake>;
     };
-    /* ------------------------------------------- */
 
     default_transform: matrix_transform {
         compatible = "zmk,matrix-transform";
