@@ -16,7 +16,6 @@
                 &soft_off &kp N0    &studio_unlock
             >;
 
-            /* Restored your [ and ] brackets */
             sensor-bindings = <&inc_dec_kp RBKT LBKT>;
         };
     };
