@@ -11,26 +11,25 @@
         zmk,physical-layout = &macropad_physical_layout;
     };
 
-    /* --- COLUMN-BASED WAKE ATTEMPT --- */
-    wakeup_keys {
-        compatible = "gpio-keys";
-        wakeup_col: wakeup_col {
-            /* Watching Column 0 (D6) */
-            gpios = <&xiao_d 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+    /* --- BLUE LED STATUS CONFIGURATION --- */
+    leds {
+        compatible = "gpio-leds";
+        status = "okay";
+        blue_led: led_0 {
+            /* XIAO Blue LED is on P0.06 (Low is ON) */
+            gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
+            label = "Blue LED";
         };
     };
 
-    col_wake: col_wake {
-        compatible = "zmk,gpio-key-wakeup-trigger";
-        trigger = <&wakeup_col>;
+    /* Link LED to Bluetooth Connection Status */
+    led_status {
+        compatible = "zmk,led-indicator-status";
+        led = <&blue_led>;
+        indicator = "connected"; 
     };
 
-    soft_off_waker: soft_off_waker {
-        compatible = "zmk,soft-off-wakeup-sources";
-        wakeup-sources = <&col_wake>;
-    };
-    /* --------------------------------- */
-
+    /* --- RETAINED MATRIX & LAYOUT CODE --- */
     default_transform: matrix_transform {
         compatible = "zmk,matrix-transform";
         rows = <4>;
@@ -64,7 +63,6 @@
     kscan0: kscan0 {
         compatible = "zmk,kscan-gpio-matrix";
         diode-direction = "col2row";
-        wakeup-source; 
         row-gpios = <&xiao_d 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
                   , <&xiao_d 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
                   , <&xiao_d 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
