@@ -11,48 +11,25 @@
         zmk,physical-layout = &macropad_physical_layout;
     };
 
-    /* --- STEP 1: Define physical Row keys for the hardware --- */
-    /* Note: We use 'gpio-keys' which is standard Zephyr and very stable */
+    /* --- COLUMN-BASED WAKE ATTEMPT --- */
     wakeup_keys {
         compatible = "gpio-keys";
-        wakeup_key0: wakeup_key0 {
-            gpios = <&xiao_d 7 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
-        };
-        wakeup_key1: wakeup_key1 {
-            gpios = <&xiao_d 8 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
-        };
-        wakeup_key2: wakeup_key2 {
-            gpios = <&xiao_d 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
-        };
-        wakeup_key3: wakeup_key3 {
-            gpios = <&xiao_d 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+        wakeup_col: wakeup_col {
+            /* Watching Column 0 (D6) */
+            gpios = <&xiao_d 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
         };
     };
 
-    /* --- STEP 2: Map physical keys to ZMK Wakeup Triggers --- */
-    row0_wake: row0_wake {
+    col_wake: col_wake {
         compatible = "zmk,gpio-key-wakeup-trigger";
-        trigger = <&wakeup_key0>;
-    };
-    row1_wake: row1_wake {
-        compatible = "zmk,gpio-key-wakeup-trigger";
-        trigger = <&wakeup_key1>;
-    };
-    row2_wake: row2_wake {
-        compatible = "zmk,gpio-key-wakeup-trigger";
-        trigger = <&wakeup_key2>;
-    };
-    row3_wake: row3_wake {
-        compatible = "zmk,gpio-key-wakeup-trigger";
-        trigger = <&wakeup_key3>;
+        trigger = <&wakeup_col>;
     };
 
-    /* --- STEP 3: Link triggers to the Soft Off system --- */
-    /* We removed 'extra-gpios' to fix your build error */
     soft_off_waker: soft_off_waker {
         compatible = "zmk,soft-off-wakeup-sources";
-        wakeup-sources = <&row0_wake &row1_wake &row2_wake &row3_wake>;
+        wakeup-sources = <&col_wake>;
     };
+    /* --------------------------------- */
 
     default_transform: matrix_transform {
         compatible = "zmk,matrix-transform";
