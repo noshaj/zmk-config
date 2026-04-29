@@ -11,20 +11,6 @@
         zmk,physical-layout = &macropad_physical_layout;
     };
 
-    leds {
-        compatible = "gpio-leds";
-        blue_led: led_0 {
-            gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
-            label = "Blue LED";
-        };
-    };
-
-    led_status {
-        compatible = "zmk,led-indicator-status";
-        led = <&blue_led>;
-        indicator = "connected"; 
-    };
-
     default_transform: matrix_transform {
         compatible = "zmk,matrix-transform";
         rows = <4>;
