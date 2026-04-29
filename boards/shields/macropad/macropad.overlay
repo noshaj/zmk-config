@@ -11,25 +11,31 @@
         zmk,physical-layout = &macropad_physical_layout;
     };
 
-    /* --- BLUE LED STATUS CONFIGURATION --- */
+    /* --- BLUE LED STATUS --- */
     leds {
         compatible = "gpio-leds";
-        status = "okay";
         blue_led: led_0 {
-            /* XIAO Blue LED is on P0.06 (Low is ON) */
+            /* XIAO Blue LED is on P0.06 */
             gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
-            label = "Blue LED";
         };
     };
 
-    /* Link LED to Bluetooth Connection Status */
-    led_status {
-        compatible = "zmk,led-indicator-status";
+    /* This node tells ZMK to use the LED to show Bluetooth state */
+    indicator_errors {
+        compatible = "zmk,indicator-led-status";
         led = <&blue_led>;
-        indicator = "connected"; 
+        binding = <&indicate_ble_status>;
     };
 
-    /* --- RETAINED MATRIX & LAYOUT CODE --- */
+    /* Define what the LED actually does */
+    indicate_ble_status: indicate_ble_status {
+        compatible = "zmk,indicator-behavior-ble-status";
+        #binding-cells = <0>;
+        /* LED will stay on when connected */
+        stacking; 
+    };
+
+    /* --- MATRIX & LAYOUT --- */
     default_transform: matrix_transform {
         compatible = "zmk,matrix-transform";
         rows = <4>;
