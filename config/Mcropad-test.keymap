@@ -14,7 +14,7 @@
                 &kp D &kp N6 &kp N0 &kp N8
                 &mo 1 &kp N7 &kp MINUS &kp EQUAL
             >;
-            sensor-bindings = <&inc_dec_kp LBKT RBKT>;
+            sensor-bindings = <&inc_dec_kp RBKT LBKT>;
         };
 
         // Layer 1: Bluetooth
