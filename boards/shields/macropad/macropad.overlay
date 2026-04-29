@@ -11,7 +11,7 @@
         zmk,physical-layout = &macropad_physical_layout;
     };
 
-    /* --- STEP 1: Define physical keys for the wakeup system --- */
+    /* --- STEP 1: Define physical Row keys for the hardware --- */
     wakeup_keys {
         compatible = "gpio-keys";
         wakeup_key0: wakeup_key0 {
@@ -28,7 +28,7 @@
         };
     };
 
-    /* --- STEP 2: Map those physical keys to ZMK Wakeup Triggers --- */
+    /* --- STEP 2: Map physical keys to ZMK Wakeup Triggers --- */
     row0_wake: row0_wake {
         compatible = "zmk,gpio-key-wakeup-trigger";
         trigger = <&wakeup_key0>;
@@ -46,10 +46,15 @@
         trigger = <&wakeup_key3>;
     };
 
-    /* --- STEP 3: Link them to the Soft Off system --- */
+    /* --- STEP 3: Link Rows AND Columns to the Wakeup System --- */
     soft_off_waker: soft_off_waker {
         compatible = "zmk,soft-off-wakeup-sources";
         wakeup-sources = <&row0_wake &row1_wake &row2_wake &row3_wake>;
+        
+        /* These column pins are kept high so the rows can 'detect' the press */
+        extra-gpios = <&xiao_d 6 GPIO_ACTIVE_HIGH>,
+                      <&xiao_d 5 GPIO_ACTIVE_HIGH>,
+                      <&xiao_d 4 GPIO_ACTIVE_HIGH>;
     };
 
     default_transform: matrix_transform {
