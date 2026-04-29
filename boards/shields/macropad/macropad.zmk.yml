@@ -1,6 +1,6 @@
 file_format: "1"
 id: macropad
-name: My Custom Macropad
+name: ak34
 type: shield
 url: https://zmk.dev
 board: ["seeeduino_xiao_ble"]
