@@ -15,10 +15,16 @@
     leds {
         compatible = "gpio-leds";
         blue_led: led_0 {
-            /* XIAO Blue LED is on P0.06 */
             gpios = <&gpio0 6 GPIO_ACTIVE_LOW>;
             label = "Blue LED";
         };
+    };
+
+    /* Link Blue LED to Bluetooth connection status */
+    led_status {
+        compatible = "zmk,led-indicator-status";
+        led = <&blue_led>;
+        indicator = "connected"; 
     };
 
     /* --- MATRIX & LAYOUT --- */
